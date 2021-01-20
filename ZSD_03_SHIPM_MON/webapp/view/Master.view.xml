@@ -57,11 +57,7 @@
                                 </rules>
                             </MaskInput>
                         <Button text="Select shipments" press=".onSelectShipments" />
-                        
-                        
-                        
-                        
-                        
+
                         <ToolbarSpacer/>
                         
                         
