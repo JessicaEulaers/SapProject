@@ -23,7 +23,7 @@
 				items="{
 					path: '/ShipmentSet',
 					sorter: {
-						path: 'IvTplst',
+						path: 'IvTknum',
 						descending: false
 					},
 					groupHeaderFactory: '.createGroupHeader'
@@ -35,20 +35,26 @@
 				growingScrollToLoad="true"
 				updateFinished=".onUpdateFinished"
 				selectionChange=".onSelectionChange">
-				<infoToolbar>
-					<Toolbar
-						active="true"
-						id="filterBar"
-						visible="{masterView>/isFilterBarVisible}"
-						press=".onOpenViewSettings">
-						<Title
-							id="filterBarLabel"
-							text="{masterView>/filterBarLabel}"
-							level="H3"/>
-					</Toolbar>
-				</infoToolbar>
 				<headerToolbar>
-					<OverflowToolbar>
+					<Toolbar> 
+                        <Label text="Planning date" labelFor="pldate"/>
+                          <DatePicker
+                                id="pldate"
+                                placeholder="Enter Date"
+                                change="handleChange"
+                                width="10rem"/>
+                        
+                        <Label text="Shipment number" tooltip="Numeric only"/>
+                            <MaskInput id="tknum" mask="999999" placeholderSymbol="_" placeholder="Enter a shipment number"/>
+                        
+                        <Label text="Planning point" tooltip="Any character"/>
+                            <MaskInput id="tplst" mask="~~~~" placeholderSymbol="_" placeholder="Enter a planning point">
+                                <rules>
+                                    <MaskInputRule maskFormatSymbol="~" regex="[^_]"/>
+                                </rules>
+                            </MaskInput>
+                        <Button text="Select shipments" press=".onSelectShipments" />
+                        <ToolbarSpacer/>               
 						<SearchField
 							id="searchField"
 							showRefreshButton="true"
@@ -69,28 +75,15 @@
 							press=".onOpenViewSettings"
 							icon="sap-icon://sort"
 							type="Transparent"/>
-						<Button
-							id="filterButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://filter"
-							type="Transparent"/>
-						<Button
-							id="groupButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://group-2"
-							type="Transparent"/>
-					</OverflowToolbar>
+                            
+					</Toolbar>
 				</headerToolbar>
 				<items>
 					<ObjectListItem
 						type="Navigation"
 						press=".onSelectionChange"
-						title="{IvTplst}"
-						number="{
-							path: 'IvTplst',
-							formatter: '.formatter.currencyValue'
-						}"
->
+						title="{IvTknum}"
+                    >
 					</ObjectListItem>
 				</items>
 			</List>

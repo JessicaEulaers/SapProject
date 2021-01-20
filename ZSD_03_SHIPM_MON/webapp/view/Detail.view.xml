@@ -10,19 +10,11 @@
 		busyIndicatorDelay="{detailView>/delay}">
 		<semantic:titleHeading>
 			<Title
-				text="{IvTplst}"
+				text="{IvTknum}"
 				level="H2"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
 			<ObjectAttribute title="{i18n>priceTitle}"/>
-			<ObjectNumber
-				id="objectHeaderNumber"
-				number="{
-					path: 'IvTplst',
-					formatter: '.formatter.currencyValue'
-				}"
-
-			/>
 		</semantic:headerContent>
 		<semantic:content>
 			<Table
