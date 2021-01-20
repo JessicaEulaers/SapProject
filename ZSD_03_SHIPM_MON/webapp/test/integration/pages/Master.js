@@ -20,7 +20,26 @@ sap.ui.define([
 			actions : {
 
 				iSortTheListOnName : function () {
+<<<<<<< HEAD
 					return this.iChooseASorter("sortButton", "Sort By <IvTknum>");
+=======
+					return this.iChooseASorter("sortButton", "Sort By <IvTplst>");
+				},
+				iSortTheListOnUnitNumber : function () {
+					return this.iChooseASorter("sortButton", "Sort By <IvTplst>");
+				},
+
+				iFilterTheListOnUnitNumber : function () {
+					return this.iMakeASelection("filterButton", "<IvTplst>", "<100 ");
+				},
+
+				iGroupTheList : function () {
+					return this.iChooseASorter("groupButton", "<IvTplst> Group");
+				},
+
+				iRemoveListGrouping : function () {
+					return this.iChooseASorter("groupButton", "None");
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				},
 				iOpenViewSettingsDialog : function () {
 					return this.waitFor({
@@ -230,7 +249,11 @@ sap.ui.define([
 					this.getContext().currentItem = {
 						bindingPath: oBindingContext.getPath(),
 						id: oBindingContext.getProperty("IvTknum"),
+<<<<<<< HEAD
 						title: oBindingContext.getProperty("IvTknum")
+=======
+						title: oBindingContext.getProperty("IvTplst")
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 					};
 				}
 			},
@@ -264,6 +287,24 @@ sap.ui.define([
 					});
 				},
 
+<<<<<<< HEAD
+=======
+				theListShouldContainOnlyFormattedUnitNumbers : function () {
+					var rTwoDecimalPlaces =  /^-?\d+\.\d{2}$/;
+					return this.waitFor({
+						controlType : "sap.m.ObjectListItem",
+						viewName : sViewName,
+						success : function (aNumberControls) {
+							Opa5.assert.ok(aNumberControls.every(function(oNumberControl){
+									return rTwoDecimalPlaces.test(oNumberControl.getNumber());
+								}),
+								"Numbers in ObjectListItems numbers are properly formatted");
+						},
+						errorMessage : "List has no entries which can be checked for their formatting"
+					});
+				},
+
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				theListHeaderDisplaysZeroHits : function () {
 					return this.waitFor({
 						viewName : sViewName,
@@ -310,16 +351,28 @@ sap.ui.define([
 				},
 
 				theListShouldBeFilteredOnUnitNumber : function () {
+<<<<<<< HEAD
 					return this.theListShouldBeFilteredOnFieldUsingComparator("", 100);
+=======
+					return this.theListShouldBeFilteredOnFieldUsingComparator("IvTplst", 100);
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				},
 
 
 				theListShouldBeSortedAscendingOnUnitNumber : function () {
+<<<<<<< HEAD
 					return this.theListShouldBeSortedAscendingOnField("");
 				},
 
 				theListShouldBeSortedAscendingOnName : function () {
 					return this.theListShouldBeSortedAscendingOnField("IvTknum");
+=======
+					return this.theListShouldBeSortedAscendingOnField("IvTplst");
+				},
+
+				theListShouldBeSortedAscendingOnName : function () {
+					return this.theListShouldBeSortedAscendingOnField("IvTplst");
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				},
 
 				theListShouldBeFilteredOnFieldUsingComparator : function (sField, iComparator) {

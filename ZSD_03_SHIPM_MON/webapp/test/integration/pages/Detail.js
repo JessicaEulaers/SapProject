@@ -129,6 +129,21 @@ sap.ui.define([
 					}));
 				},
 
+<<<<<<< HEAD
+=======
+				theDetailViewShouldContainOnlyFormattedUnitNumbers : function () {
+					var rTwoDecimalPlaces =  /^-?\d+\.\d{2}$/;
+					return this.waitFor({
+						id : "objectHeaderNumber",
+						viewName : sViewName,
+						success : function (oNumberControl) {
+							Opa5.assert.ok(rTwoDecimalPlaces.test(oNumberControl.getNumber()), "Object numbers are properly formatted");
+						},
+						errorMessage : "Object view has no entries which can be checked for their formatting"
+					});
+				},
+
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				theLineItemsHeaderShouldDisplayTheAmountOfEntries : function () {
 					return this.waitFor({
 						id : "lineItemsList",

@@ -15,7 +15,12 @@ sap.ui.define([
 		// Assertions
 		Then.onTheMasterPage.iShouldSeeTheList().
 			and.theListShouldHaveAllEntries().
+<<<<<<< HEAD
 			and.theHeaderShouldDisplayAllEntries();
+=======
+			and.theHeaderShouldDisplayAllEntries().
+			and.theListShouldContainOnlyFormattedUnitNumbers();
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 	});
 
 	opaTest("Search for the First object should deliver results that contain the firstObject in the name", function (Given, When, Then) {
@@ -57,11 +62,71 @@ sap.ui.define([
 
 		// Assertions
 		Then.onTheMasterPage.theListShouldBeSortedAscendingOnName();
+<<<<<<< HEAD
 
 		//Clean up
 		Then.iTeardownMyApp();
 
 	});
 
+=======
+	});
+
+	opaTest("MasterList Filtering on UnitNumber less than 100", function(Given, When, Then) {
+		// Action
+		When.onTheMasterPage.iFilterTheListOnUnitNumber();
+
+		// Assertion
+		Then.onTheMasterPage.theListShouldBeFilteredOnUnitNumber();
+	});
+
+	opaTest("MasterList remove filter should display all items", function(Given, When, Then) {
+		// Action
+		When.onTheMasterPage.iOpenViewSettingsDialog().
+		and.iPressResetInViewSelectionDialog().
+		and.iPressOKInViewSelectionDialog();
+
+		// Assertion
+		Then.onTheMasterPage.theListShouldHaveAllEntries();
+	});
+
+
+	opaTest("MasterList Sorting on UnitNumber", function(Given, When, Then) {
+		// Actions
+		When.onTheMasterPage.iSortTheListOnUnitNumber();
+
+		// Assertions
+		Then.onTheMasterPage.theListShouldBeSortedAscendingOnUnitNumber();
+	});
+
+	opaTest("MasterList grouping created group headers", function(Given, When, Then) {
+		// Action
+		When.onTheMasterPage.iGroupTheList();
+
+		// Assertion
+		Then.onTheMasterPage.theListShouldContainAGroupHeader();
+	});
+
+	opaTest("Remove grouping from MasterList delivers initial list", function(Given, When, Then) {
+		// Action
+		When.onTheMasterPage.iRemoveListGrouping();
+
+		// Assertion
+		Then.onTheMasterPage.theListShouldNotContainGroupHeaders().
+			and.theListShouldHaveAllEntries();
+	});
+
+	opaTest("Grouping the master list and sorting it should deliver the initial list", function(Given, When, Then) {
+		// Action
+		When.onTheMasterPage.iGroupTheList().
+		and.iSortTheListOnUnitNumber();
+
+		// Assertion
+		Then.onTheMasterPage.theListShouldContainAGroupHeader();
+
+		// Cleanup
+		Then.iTeardownMyApp();
+	});
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 
 });

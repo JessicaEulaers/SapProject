@@ -15,7 +15,6 @@
 		</semantic:titleHeading>
 		<semantic:headerContent>
 			<ObjectAttribute title="{i18n>priceTitle}"/>
-
 		</semantic:headerContent>
 		<semantic:content>
 			<Table

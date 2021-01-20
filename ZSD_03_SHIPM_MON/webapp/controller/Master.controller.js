@@ -7,6 +7,7 @@ sap.ui.define([
 	"sap/m/GroupHeaderListItem",
 	"sap/ui/Device",
 	"sap/ui/core/Fragment",
+
     "../model/formatter",
     "sap/ui/unified/DateTypeRange",
     "sap/ui/core/Core",
@@ -35,6 +36,25 @@ sap.ui.define([
 				// so it can be restored later on. Busy handling on the master list is
 				// taken care of by the master list itself.
 				iOriginalBusyDelay = oList.getBusyIndicatorDelay();
+
+
+			this._oGroupFunctions = {
+				IvTplst : function(oContext) {
+					var iNumber = oContext.getProperty('IvTplst'),
+						key, text;
+					if (iNumber <= 20) {
+						key = "LE20";
+						text = this.getResourceBundle().getText("masterGroup1Header1");
+					} else {
+						key = "GT20";
+						text = this.getResourceBundle().getText("masterGroup1Header2");
+					}
+					return {
+						key: key,
+						text: text
+					};
+				}.bind(this)
+			};
 
 
 			this._oList = oList;
@@ -99,7 +119,9 @@ sap.ui.define([
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
+
 				this._oListFilterState.aSearch = [new Filter("IvTknum", FilterOperator.Contains, sQuery)];
+
 			} else {
 				this._oListFilterState.aSearch = [];
 			}
@@ -159,6 +181,30 @@ sap.ui.define([
 		 */
 		onConfirmViewSettingsDialog : function (oEvent) {
 
+			var aFilterItems = oEvent.getParameters().filterItems,
+				aFilters = [],
+				aCaptions = [];
+
+			// update filter state:
+			// combine the filter array and the filter string
+			aFilterItems.forEach(function (oItem) {
+				switch (oItem.getKey()) {
+					case "Filter1" :
+						aFilters.push(new Filter("IvTplst", FilterOperator.LE, 100));
+						break;
+					case "Filter2" :
+						aFilters.push(new Filter("IvTplst", FilterOperator.GT, 100));
+						break;
+					default :
+						break;
+				}
+				aCaptions.push(oItem.getText());
+			});
+
+			this._oListFilterState.aFilter = aFilters;
+			this._updateFilterBar(aCaptions.join(", "));
+			this._applyFilterSearch();
+
 			this._applySortGroup(oEvent);
 		},
 
@@ -172,6 +218,16 @@ sap.ui.define([
 				sPath,
 				bDescending,
 				aSorters = [];
+
+			// apply sorter to binding
+			// (grouping comes before sorting)
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				var vGroup = this._oGroupFunctions[sPath];
+				aSorters.push(new Sorter(sPath, bDescending, vGroup));
+			}
+
 			sPath = mParams.sortItem.getKey();
 			bDescending = mParams.sortDescending;
 			aSorters.push(new Sorter(sPath, bDescending));
@@ -226,6 +282,7 @@ sap.ui.define([
 		onNavBack : function() {
 			// eslint-disable-next-line sap-no-history-manipulation
 			history.go(-1);
+
         },
 
         handleChange: function (oEvent) {
@@ -247,6 +304,7 @@ sap.ui.define([
 
         },
 
+
 		/* =========================================================== */
 		/* begin: internal methods                                     */
 		/* =========================================================== */
@@ -259,7 +317,10 @@ sap.ui.define([
 				delay: 0,
 				title: this.getResourceBundle().getText("masterTitleCount", [0]),
 				noDataText: this.getResourceBundle().getText("masterListNoDataText"),
+
 				sortBy: "IvTknum",
+
+
 				groupBy: "None"
 			});
 		},

@@ -37,16 +37,15 @@
 				selectionChange=".onSelectionChange">
 				<headerToolbar>
                 
-					<OverflowToolbar> 
-                    
+					<Toolbar> 
+
                         <Label text="Planning date" labelFor="pldate"/>
-                          <!-- <DatePicker
+                          <DatePicker
                                 id="pldate"
                                 placeholder="Enter Date"
                                 change="handleChange"
-                                class="sapUiSmallMarginBottom"
-                                showFooter="true"/>
-                        --> 
+                                width="10rem"/>
+                        
                         <Label text="Shipment number" tooltip="Numeric only"/>
                             <MaskInput id="tknum" mask="999999" placeholderSymbol="_" placeholder="Enter a shipment number"/>
                         
@@ -82,14 +81,14 @@
 							icon="sap-icon://sort"
 							type="Transparent"/>
                             
-					</OverflowToolbar>
+					</Toolbar>
 				</headerToolbar>
 				<items>
 					<ObjectListItem
 						type="Navigation"
 						press=".onSelectionChange"
 						title="{IvTknum}"
->
+                    >
 					</ObjectListItem>
 				</items>
 			</List>

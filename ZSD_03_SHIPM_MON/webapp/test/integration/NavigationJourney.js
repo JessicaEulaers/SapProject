@@ -58,6 +58,10 @@ sap.ui.define([
 
 		// Assertions
 		Then.onTheDetailPage.iShouldSeeTheObjectLineItemsList().
+<<<<<<< HEAD
+=======
+			and.theDetailViewShouldContainOnlyFormattedUnitNumbers().
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 			and.theLineItemsListShouldHaveTheCorrectNumberOfItems().
 			and.theLineItemsHeaderShouldDisplayTheAmountOfEntries();
 
