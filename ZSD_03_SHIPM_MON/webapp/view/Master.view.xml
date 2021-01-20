@@ -36,9 +36,7 @@
 				updateFinished=".onUpdateFinished"
 				selectionChange=".onSelectionChange">
 				<headerToolbar>
-                
 					<Toolbar> 
-
                         <Label text="Planning date" labelFor="pldate"/>
                           <DatePicker
                                 id="pldate"
@@ -56,10 +54,7 @@
                                 </rules>
                             </MaskInput>
                         <Button text="Select shipments" press=".onSelectShipments" />
-
-                        <ToolbarSpacer/>
-                        
-                        
+                        <ToolbarSpacer/>               
 						<SearchField
 							id="searchField"
 							showRefreshButton="true"
