@@ -299,30 +299,42 @@ sap.ui.define([
         onSelectShipments: function(oEvent){
             var oBukrs = this.byId("bukrs"),
                 oPldate = this.byId("pldate"),
-                oTplst = this.byId("tplst"),
-                oBukrsFilter,
+                oTplst = this.byId("tplst");
+
+            
+            var list = this.getView().byId("list");
+            var oBindingItems = list.getBinding("items");
+           
+            var aFilters=[];
+            aFilters.push(new sap.ui.model.Filter({path:"IvTplst",operator:"EQ",value1:oTplst}));
+            oBindingItems.filter(aFilters);
+
+            /*   oBukrsFilter,
                 oTplstFilter,
                 oPldateFilter,
                 //sServiceUrl = "https://r36z.ucc.ovgu.de/sap/opu/odata/sap/ZSD_03_SHIPM_MON/ShipmentSet",
                 filters = [];
+                console.log(oBukrs);
+                console.log(oPldate);
+                console.log(oTplst);
                 if(oPldate != null && oTplst != null && oBukrs != null){
                 //var oFilter = new sap.ui.model.Filter("PlannedDate",sap.ui.model.FilterOperator.EQ, oPldate);
-                    oPldateFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oPldate);
-                    oTplstFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oTplst);
-                    oBukrsFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oBukrs);
+                    oPldateFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oPldate);
+                    oTplstFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oTplst);
+                    oBukrsFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oBukrs);
                     filters.push(oBukrsFilter);
                     filters.push(oTplstFilter);
                     filters.push(oPldateFilter);
                 }
                 if(oPldate != null && oTplst != null && oBukrs == null){
-                    oPldateFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oPldate);
-                    oTplstFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oTplst);
+                    oPldateFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oPldate);
+                    oTplstFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oTplst);
                     filters.push(oTplstFilter);
                     filters.push(oPldateFilter);
                 }
                 if(oPldate != null && oTplst == null && oBukrs != null){
-                     oPldateFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oPldate);                   
-                    oBukrsFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oBukrs);
+                     oPldateFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oPldate);                   
+                    oBukrsFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oBukrs);
                     filters.push(oBukrsFilter);
                     filters.push(oPldateFilter);
                 }
@@ -331,7 +343,7 @@ sap.ui.define([
                 var binding = list.getBinding("items");
                 binding.filter(filters);
 
-                
+                */
 
         },
 

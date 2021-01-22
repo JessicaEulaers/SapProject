@@ -57,7 +57,7 @@
                                     <MaskInputRule maskFormatSymbol="~" regex="[^_]"/>
                                 </rules>
                             </MaskInput>
-                        <Button text="Select shipments" press=".onSelectShipments" />
+                        <Button text="Select shipments" press=".onSelectShipments"  />
                         <ToolbarSpacer/>               
 						<SearchField
 							id="searchField"
