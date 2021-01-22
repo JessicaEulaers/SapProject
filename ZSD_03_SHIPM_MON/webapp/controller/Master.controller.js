@@ -297,9 +297,40 @@ sap.ui.define([
 			}
         },
         onSelectShipments: function(oEvent){
-            var oTknum = this.byId("tknum"),
+            var oBukrs = this.byId("bukrs"),
                 oPldate = this.byId("pldate"),
-                oTplst = this.byId("tplst");
+                oTplst = this.byId("tplst"),
+                oBukrsFilter,
+                oTplstFilter,
+                oPldateFilter,
+                //sServiceUrl = "https://r36z.ucc.ovgu.de/sap/opu/odata/sap/ZSD_03_SHIPM_MON/ShipmentSet",
+                filters = [];
+                if(oPldate != null && oTplst != null && oBukrs != null){
+                //var oFilter = new sap.ui.model.Filter("PlannedDate",sap.ui.model.FilterOperator.EQ, oPldate);
+                    oPldateFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oPldate);
+                    oTplstFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oTplst);
+                    oBukrsFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oBukrs);
+                    filters.push(oBukrsFilter);
+                    filters.push(oTplstFilter);
+                    filters.push(oPldateFilter);
+                }
+                if(oPldate != null && oTplst != null && oBukrs == null){
+                    oPldateFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oPldate);
+                    oTplstFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oTplst);
+                    filters.push(oTplstFilter);
+                    filters.push(oPldateFilter);
+                }
+                if(oPldate != null && oTplst == null && oBukrs != null){
+                     oPldateFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oPldate);                   
+                    oBukrsFilter = new sap.ui.model.Filter('/ShipmentSet', sap.ui.model.FilterOperator.Contains, oBukrs);
+                    filters.push(oBukrsFilter);
+                    filters.push(oPldateFilter);
+                }
+
+                var list = this.getView().byId("list");
+                var binding = list.getBinding("items");
+                binding.filter(filters);
+
                 
 
         },
@@ -317,10 +348,7 @@ sap.ui.define([
 				delay: 0,
 				title: this.getResourceBundle().getText("masterTitleCount", [0]),
 				noDataText: this.getResourceBundle().getText("masterListNoDataText"),
-
 				sortBy: "IvTknum",
-
-
 				groupBy: "None"
 			});
 		},

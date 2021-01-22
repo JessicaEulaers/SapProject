@@ -44,8 +44,12 @@
                                 change="handleChange"
                                 width="10rem"/>
                         
-                        <Label text="Shipment number" tooltip="Numeric only"/>
-                            <MaskInput id="tknum" mask="999999" placeholderSymbol="_" placeholder="Enter a shipment number"/>
+                        <Label text="Company code" tooltip="Any character"/>
+                            <MaskInput id="bukrs" mask="~~~~" placeholderSymbol="_" placeholder="Enter a company code">
+                                <rules>
+                                    <MaskInputRule maskFormatSymbol="~" regex="[^_]"/>
+                                </rules>
+                            </MaskInput>
                         
                         <Label text="Planning point" tooltip="Any character"/>
                             <MaskInput id="tplst" mask="~~~~" placeholderSymbol="_" placeholder="Enter a planning point">
