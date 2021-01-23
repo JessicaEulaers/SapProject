@@ -2,8 +2,9 @@ sap.ui.define([
 	"./BaseController",
 	"sap/ui/model/json/JSONModel",
 	"../model/formatter",
-	"sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary) {
+    "sap/m/library",
+    "sap/ui/model/Filter",
+], function (BaseController, JSONModel, formatter, mobileLibrary,Filter) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -31,7 +32,11 @@ sap.ui.define([
 
 			this.setModel(oViewModel, "detailView");
 
-			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+            this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+            
+
+                         
+            
 		},
 
 		/* =========================================================== */
