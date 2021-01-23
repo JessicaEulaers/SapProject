@@ -1,0 +1,90 @@
+<mvc:View
+	controllerName="be.ap.flight.controller.Bookings"
+	xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:mvc="sap.ui.core.mvc">
+
+	<semantic:SemanticPage
+		id="bookingsPage"
+		busy="{bookingsView>/busy}"
+		busyIndicatorDelay="{bookingsView>/delay}">
+		<semantic:titleHeading>
+			<Title
+				text=" {bookingsView>/Flight/Connid} - {bookingsView>/Flight/Fldate}"
+				level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<ObjectAttribute title="{i18n>priceTitle}" text="{bookingsView>/Flight/Price}"/>
+            <ObjectAttribute title="{i18n>currencyCode}" text="{bookingsView>/Flight/Currency}"/>
+
+
+		</semantic:headerContent>
+		<semantic:content>
+        <Table items="{bookingsView>/Bookings}">
+				<headerToolbar>
+					<Toolbar>
+						<Title
+							id="lineItemsTitle"
+							text="{bookingsView>/lineItemListTitle}"
+							titleStyle="H3"
+							level="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+
+                 <Column >
+                        <Text text ="{i18n>fldate}"/>
+                  </Column>
+                  <Column >
+                        <Text text ="{i18n>price}"/>
+                  </Column>
+                  <Column >
+                        <Text text ="{i18n>name}"/>
+                  </Column>
+                  <Column >
+                        <Text text ="{i18n>luggage}"/>
+                  </Column>
+                  <Column >
+                        <Text text ="{i18n>class}"/>
+                  </Column>
+                  
+
+                </columns>
+             <items>
+                 <ColumnListItem type="Active" press="onPressFlight">
+                      <cells>
+                           <ObjectIdentifier title="{path:'bookingsView>Fldate', type: 'sap.ui.model.type.Date'}" />
+                           <ObjectIdentifier text="{parts:[{path:'bookingsView>Loccuram'}, {path:'bookingsView>Loccurkey'}],type:'sap.ui.model.type.Currency'}"/>
+                           <ObjectIdentifier text="{bookingsView>Passname}" />
+                           <ObjectIdentifier text="{parts:[{path:'bookingsView>Luggweight'}, {path:'bookingsView>Wunit'}],type:'sap.ui.model.type.Currency'}"/>
+                           <ObjectIdentifier text="{= ${bookingsView>Class} === 'C' ? 'Business' : ${bookingsView>Class} === 'Y' ? 'Economy' : 'First'}" />
+                           </cells>
+                    </ColumnListItem>
+                </items>
+			</Table>
+		</semantic:content>
+		
+
+		<semantic:closeAction>
+			<semantic:CloseAction
+					id="closeColumn"
+					press=".onCloseBookingsPress"/>
+		</semantic:closeAction>
+
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction
+					id="enterFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction
+					id="exitFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
