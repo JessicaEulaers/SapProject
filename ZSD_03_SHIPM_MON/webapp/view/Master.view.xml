@@ -43,14 +43,7 @@
                                 placeholder="Enter Date"
                                 change="handleChange"
                                 width="10rem"/>
-                        
-                        <Label text="Company code" tooltip="Any character"/>
-                            <MaskInput id="bukrs" mask="~~~~" placeholderSymbol="_" placeholder="Enter a company code">
-                                <rules>
-                                    <MaskInputRule maskFormatSymbol="~" regex="[^_]"/>
-                                </rules>
-                            </MaskInput>
-                        
+                       
                         <Label text="Planning point" tooltip="Any character"/>
                             <MaskInput id="tplst" mask="~~~~" placeholderSymbol="_" placeholder="Enter a planning point">
                                 <rules>
@@ -67,8 +60,8 @@
 							width="auto">
 							<layoutData>
 								<OverflowToolbarLayoutData
-									minWidth="150px"
-									maxWidth="240px"
+									minWidth="50px"
+									maxWidth="140px"
 									shrinkable="true"
 									priority="NeverOverflow"/>
 							</layoutData>
@@ -86,8 +79,13 @@
 					<ObjectListItem
 						type="Navigation"
 						press=".onSelectionChange"
-						title="{IvTknum}"
+						title="{IvTknum} - {IvTplst} "
                     >
+                    <ObjectAttribute text="{
+						path: 'PlannedDate',
+						type: 'sap.ui.model.type.Date'
+					    }"/> 
+                    
 					</ObjectListItem>
 				</items>
 			</List>

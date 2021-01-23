@@ -141,11 +141,7 @@ sap.ui.define([
 				oResourceBundle = this.getResourceBundle(),
 				oObject = oView.getModel().getObject(sPath),
 				sObjectId = oObject.IvTknum,
-<<<<<<< HEAD
 				sObjectName = oObject.IvTknum,
-=======
-				sObjectName = oObject.IvTplst,
->>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				oViewModel = this.getModel("detailView");
 
 			this.getOwnerComponent().oListSelector.selectAListItem(sPath);

@@ -11,7 +11,8 @@ sap.ui.define([
     "../model/formatter",
     "sap/ui/unified/DateTypeRange",
     "sap/ui/core/Core",
-	"sap/ui/core/library"
+    "sap/ui/core/library"
+
 ], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter,DateTypeRange,Core,CoreLibrary) {
     "use strict";
     var ValueState = CoreLibrary.ValueState;
@@ -297,30 +298,34 @@ sap.ui.define([
 			}
         },
         onSelectShipments: function(oEvent){
-            var oBukrs = this.byId("bukrs"),
-                oPldate = this.byId("pldate"),
-                oTplst = this.byId("tplst");
-
-            
-            var list = this.getView().byId("list");
-            var oBindingItems = list.getBinding("items");
-           
-            var aFilters=[];
-            aFilters.push(new sap.ui.model.Filter({path:"IvTplst",operator:"EQ",value1:oTplst}));
-            oBindingItems.filter(aFilters);
-
-            /*   oBukrsFilter,
+            var //oBukrs = this.byId("bukrs").getValue(),
+                oPldate = this.byId("pldate").getDateValue(),
+                oTplst = this.byId("tplst").getValue(),
+                //oBukrsFilter,
                 oTplstFilter,
-                oPldateFilter,
-                //sServiceUrl = "https://r36z.ucc.ovgu.de/sap/opu/odata/sap/ZSD_03_SHIPM_MON/ShipmentSet",
-                filters = [];
-                console.log(oBukrs);
+                oPldateFilter;
+               
+               // filters = [];
+    
+                oPldate = new Date(oPldate.setHours(oPldate.getHours()+1));
+
+                var list = this.getView().byId("list");
+                var oBindingItems = list.getBinding("items");
+                
+            
+                var aFilters=[];
+                aFilters.push(new sap.ui.model.Filter({path:"IvTplst",operator:"EQ",value1:oTplst}));
+                aFilters.push(new sap.ui.model.Filter({path:"PlannedDate",operator:"EQ",value1:oPldate}));
+                oBindingItems.filter(aFilters);
+
+              /*
+                //console.log(oBukrs);
                 console.log(oPldate);
                 console.log(oTplst);
                 if(oPldate != null && oTplst != null && oBukrs != null){
                 //var oFilter = new sap.ui.model.Filter("PlannedDate",sap.ui.model.FilterOperator.EQ, oPldate);
                     oPldateFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oPldate);
-                    oTplstFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oTplst);
+                    oTplstFilter = new sap.ui.model.Filter('IvTplst', sap.ui.model.FilterOperator.EQ, oTplst);
                     oBukrsFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oBukrs);
                     filters.push(oBukrsFilter);
                     filters.push(oTplstFilter);
@@ -333,7 +338,7 @@ sap.ui.define([
                     filters.push(oPldateFilter);
                 }
                 if(oPldate != null && oTplst == null && oBukrs != null){
-                     oPldateFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oPldate);                   
+                    oPldateFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oPldate);                   
                     oBukrsFilter = new sap.ui.model.Filter('', sap.ui.model.FilterOperator.EQ, oBukrs);
                     filters.push(oBukrsFilter);
                     filters.push(oPldateFilter);
@@ -342,8 +347,8 @@ sap.ui.define([
                 var list = this.getView().byId("list");
                 var binding = list.getBinding("items");
                 binding.filter(filters);
-
-                */
+            */
+                
 
         },
 
