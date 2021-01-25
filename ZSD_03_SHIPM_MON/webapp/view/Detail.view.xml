@@ -10,25 +10,19 @@
 		busyIndicatorDelay="{detailView>/delay}">
 		<semantic:titleHeading>
 			<Title
-				text="{IvTplst}"
+				text="Shipment number: {IvTknum}"
 				level="H2"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
-			<ObjectAttribute title="{i18n>priceTitle}"/>
-			<ObjectNumber
-				id="objectHeaderNumber"
-				number="{
-					path: 'IvTplst',
-					formatter: '.formatter.currencyValue'
-				}"
+			<ObjectAttribute text="Planning point: {IvTplst}. "/>
 
-			/>
+            <ObjectAttribute text="Cointainer ID: {IsHeader/Signi}. "/>
 		</semantic:headerContent>
 		<semantic:content>
 			<Table
 				id="lineItemsList"
 				width="auto"
-				items="{Unknown}"
+				items="{ToDeliveries}"
 				updateFinished=".onListUpdateFinished"
 				noDataText="{i18n>detailLineItemTableNoDataText}"
 				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
@@ -43,38 +37,47 @@
 				</headerToolbar>
 				<columns>
 					<Column>
-						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+						<Text text="{i18n>ShipmentNum}"/>
 					</Column>
-					<Column
-						minScreenWidth="Tablet"
-						demandPopin="true"
-						hAlign="End">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					<Column>
+						<Text text="{i18n>DeliveryNum}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>ShippintPoint}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>Plant}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>Count}"/>
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem>
+					<ColumnListItem type="Active" press="pressOnDelivery">
 						<cells>
 							<ObjectIdentifier
-								title="{Unknown}"
-								text="{Unknown}"/>
-							<ObjectNumber
-								number="{
-									path: 'Unknown',
-									formatter: '.formatter.currencyValue'
-								}"
-								unit="{Unknown}"/>
+                                                                
+								title="{Tknum}"                                                              
+								/>
+                                <ObjectIdentifier
+								title="{Vbeln}"
+								/>
+                                <ObjectIdentifier
+								title="{Vstel}"
+								/>
+                                <ObjectIdentifier
+								title="{Werks}"
+								/>
+                                <ObjectIdentifier
+								title="{Count}"
+								/>
 						</cells>
 					</ColumnListItem>
 				</items>
 			</Table>
 		</semantic:content>
 		<!--Semantic ShareMenu Buttons-->
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction
-				id="shareEmail"
-				press=".onSendEmailPress"/>
-		</semantic:sendEmailAction>
+
 
 		<semantic:closeAction>
 			<semantic:CloseAction

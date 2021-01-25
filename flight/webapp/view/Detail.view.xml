@@ -1,0 +1,188 @@
+<mvc:View
+	controllerName="be.ap.flight.controller.Detail"
+	xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+
+	<semantic:SemanticPage
+		id="detailPage"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}">
+		<semantic:titleHeading>
+			<Title
+				text="{Carrname} ({Carrid})"
+				level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+            <ObjectAttribute text="{Currcode}" />
+            <ObjectAttribute text="{Url}" />
+		</semantic:headerContent>
+		<semantic:content>
+        <VBox>
+			<Table
+				id="lineItemsList"
+				width="auto"
+				items="{FlightScheduleSet}"
+				updateFinished=".onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+				<headerToolbar>
+					<Toolbar>
+						<Title
+							id="lineItemsTitle"
+							text="{detailView>/lineItemListTitle}"
+							titleStyle="H3"
+							level="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>connId}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>from}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>to}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>flighttime}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>time}"/>
+					</Column>
+                    <Column>
+						<Text text="{i18n>distance}"/>
+					</Column>
+                    <Column hAlign="Center">
+						<Text text="{i18n>chartered}" />
+					</Column>
+                    <Column>
+						<Text text="{i18n>arrivalDay}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem
+                        type="Navigation"
+                        press="onPress"
+                        >
+						<cells>
+							<ObjectIdentifier
+                                    text="{Connid}"
+                                    />
+                                <ObjectIdentifier
+                                    title="{Airpfrom} ({Cityfrom})"
+                                    text="{Countryfr}"
+                                    />
+                                <ObjectIdentifier
+                                    title="{Airpto} ({Cityto})"
+                                    text="{Countryto}"
+                                    />
+							    <ObjectNumber
+                                    number="{
+                                        path: 'Fltime',
+                                        formatter: '.formatter.currencyValue'
+                                    }"
+                                    unit="{i18n>minutes}"/>
+                                <ObjectIdentifier
+                                    title="{
+                                        path: 'Deptime',
+                                        formatter: '.formatter.timeValue'
+                                    }"
+                                    text="{
+                                        path: 'Arrtime',
+                                        formatter: '.formatter.timeValue'
+                                    }"
+								/>
+                                <ObjectIdentifier
+                                    title="{Distance}"
+                                    text="{Distid}"
+								/>
+                                <core:Icon
+                                    src="{=${Fltype} === 'X' ? 'sap-icon://accept' : 'sap-icon://decline'}"
+                                    color="{=${Fltype} === 'X' ? 'green' : 'red'}">
+								</core:Icon>
+                                <ObjectIdentifier
+                                    text="{Period}"
+								/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+            <Table 
+                items="{detailView>/Flights}">
+                <headerToolbar>
+                    <Toolbar >
+                    <Title text="{i18n>Flights} {i18n>for} {detailView>/Connid}"/>
+                    <ToolbarSpacer />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>fldate}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>totalRevenue}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>planetype}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>price}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>maximumseats}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>businessClass}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>firstClass}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{detailView>Fldate}"/>
+                             <ObjectIdentifier title="{detailView>Paymentsum}"/>
+                            <ObjectIdentifier title="{detailView>Planetype}"/>
+                            <ObjectIdentifier title="{detailView>Price}"/>
+                            <ObjectIdentifier title="{detailView>Seatsocc} / {detailView>Seatsmax}"/>
+                            <ObjectIdentifier title="{detailView>SeatsoccB} / {detailView>SeatsmaxB}"/>
+                            <ObjectIdentifier title="{detailView>SeatsoccF} / {detailView>SeatsmaxF}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            </VBox>
+		</semantic:content>
+		<!--Semantic ShareMenu Buttons-->
+		<!-- <semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press=".onSendEmailPress"/>
+		</semantic:sendEmailAction> -->
+
+		<semantic:closeAction>
+			<semantic:CloseAction
+					id="closeColumn"
+					press=".onCloseDetailPress"/>
+		</semantic:closeAction>
+
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction
+					id="enterFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction
+					id="exitFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>

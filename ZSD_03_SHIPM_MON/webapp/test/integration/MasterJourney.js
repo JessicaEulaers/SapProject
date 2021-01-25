@@ -15,8 +15,12 @@ sap.ui.define([
 		// Assertions
 		Then.onTheMasterPage.iShouldSeeTheList().
 			and.theListShouldHaveAllEntries().
+<<<<<<< HEAD
+			and.theHeaderShouldDisplayAllEntries();
+=======
 			and.theHeaderShouldDisplayAllEntries().
 			and.theListShouldContainOnlyFormattedUnitNumbers();
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 	});
 
 	opaTest("Search for the First object should deliver results that contain the firstObject in the name", function (Given, When, Then) {
@@ -58,6 +62,14 @@ sap.ui.define([
 
 		// Assertions
 		Then.onTheMasterPage.theListShouldBeSortedAscendingOnName();
+<<<<<<< HEAD
+
+		//Clean up
+		Then.iTeardownMyApp();
+
+	});
+
+=======
 	});
 
 	opaTest("MasterList Filtering on UnitNumber less than 100", function(Given, When, Then) {
@@ -115,5 +127,6 @@ sap.ui.define([
 		// Cleanup
 		Then.iTeardownMyApp();
 	});
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 
 });

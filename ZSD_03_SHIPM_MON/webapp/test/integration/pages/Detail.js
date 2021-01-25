@@ -129,6 +129,8 @@ sap.ui.define([
 					}));
 				},
 
+<<<<<<< HEAD
+=======
 				theDetailViewShouldContainOnlyFormattedUnitNumbers : function () {
 					var rTwoDecimalPlaces =  /^-?\d+\.\d{2}$/;
 					return this.waitFor({
@@ -141,6 +143,7 @@ sap.ui.define([
 					});
 				},
 
+>>>>>>> 7ce5dc4deba9f7389c79fc9f4815c620479a4107
 				theLineItemsHeaderShouldDisplayTheAmountOfEntries : function () {
 					return this.waitFor({
 						id : "lineItemsList",

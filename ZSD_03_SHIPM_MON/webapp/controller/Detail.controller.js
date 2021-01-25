@@ -2,8 +2,9 @@ sap.ui.define([
 	"./BaseController",
 	"sap/ui/model/json/JSONModel",
 	"../model/formatter",
-	"sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary) {
+    "sap/m/library",
+    "sap/ui/model/Filter",
+], function (BaseController, JSONModel, formatter, mobileLibrary,Filter) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -31,26 +32,20 @@ sap.ui.define([
 
 			this.setModel(oViewModel, "detailView");
 
-			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
-		},
+            this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+            
+
+                         
+            
+        },
+        	
 
 		/* =========================================================== */
 		/* event handlers                                              */
 		/* =========================================================== */
 
-		/**
-		 * Event handler when the share by E-Mail button has been clicked
-		 * @public
-		 */
-		onSendEmailPress : function () {
-			var oViewModel = this.getModel("detailView");
 
-			URLHelper.triggerEmail(
-				null,
-				oViewModel.getProperty("/shareSendEmailSubject"),
-				oViewModel.getProperty("/shareSendEmailMessage")
-			);
-		},
+
 
 
 		/**
@@ -73,7 +68,14 @@ sap.ui.define([
 				}
 				oViewModel.setProperty("/lineItemListTitle", sTitle);
 			}
-		},
+        },
+        pressOnDelivery:function(oEvent){
+            var oDelivery = oEvent.getSource().getBindingContext("detailView");
+            this.getRouter().navTo("DeliveryItems",{
+                Tknum: oDelivery.getProperty("Tknum"),
+                Vbeln: oDelivery.getProperty("Vbeln")
+            });
+        },
 
 		/* =========================================================== */
 		/* begin: internal methods                                     */
@@ -141,7 +143,7 @@ sap.ui.define([
 				oResourceBundle = this.getResourceBundle(),
 				oObject = oView.getModel().getObject(sPath),
 				sObjectId = oObject.IvTknum,
-				sObjectName = oObject.IvTplst,
+				sObjectName = oObject.IvTknum,
 				oViewModel = this.getModel("detailView");
 
 			this.getOwnerComponent().oListSelector.selectAListItem(sPath);
