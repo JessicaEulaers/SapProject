@@ -1,36 +1,33 @@
 <mvc:View
-	controllerName="be.ap.ZSD_03_SHIPM_MON.controller.Detail"
+	controllerName="be.ap.ZSD_03_SHIPM_MON.controller.DelieveryItems"
 	xmlns="sap.m"
 	xmlns:semantic="sap.f.semantic"
 	xmlns:mvc="sap.ui.core.mvc">
 
 	<semantic:SemanticPage
-		id="detailPage"
-		busy="{detailView>/busy}"
-		busyIndicatorDelay="{detailView>/delay}">
+		id="deliveryItemsPage"
+		busy="{deliveryItemsView>/busy}"
+		busyIndicatorDelay="{deliveryItemsView>/delay}">
 		<semantic:titleHeading>
 			<Title
-				text="Shipment number: {IvTknum}"
+				text="Delievery: "
 				level="H2"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
-			<ObjectAttribute text="Planning point: {IvTplst}. "/>
-
-            <ObjectAttribute text="Cointainer ID: {IsHeader/Signi}. "/>
 		</semantic:headerContent>
 		<semantic:content>
 			<Table
 				id="lineItemsList"
 				width="auto"
-				items="{ToDeliveries}"
+				items="{DeliveryItemSet}"
 				updateFinished=".onListUpdateFinished"
-				noDataText="{i18n>detailLineItemTableNoDataText}"
-				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+				noDataText="{i18n>DeliveryItemsLineItemTableNoDataText}"
+				busyIndicatorDelay="{deliveryItemsView>/lineItemTableDelay}">
 				<headerToolbar>
 					<Toolbar>
 						<Title
 							id="lineItemsTitle"
-							text="{detailView>/lineItemListTitle}"
+							text="{deliveryItemsView>/lineItemListTitle}"
 							titleStyle="H3"
 							level="H3"/>
 					</Toolbar>
@@ -53,7 +50,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Active" press="pressOnDelivery">
+					<ColumnListItem>
 						<cells>
 							<ObjectIdentifier
                                                                 
@@ -77,12 +74,16 @@
 			</Table>
 		</semantic:content>
 		<!--Semantic ShareMenu Buttons-->
-
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press=".onSendEmailPress"/>
+		</semantic:sendEmailAction>
 
 		<semantic:closeAction>
 			<semantic:CloseAction
 					id="closeColumn"
-					press=".onCloseDetailPress"/>
+					press=".onCloseDeliveryItemsPress"/>
 		</semantic:closeAction>
 
 		<semantic:fullScreenAction>

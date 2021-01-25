@@ -52,7 +52,7 @@
                             </MaskInput>
                         <Button text="Select shipments" press=".onSelectShipments"  />
                         <ToolbarSpacer/>               
-						<SearchField
+						<!-- <SearchField
 							id="searchField"
 							showRefreshButton="true"
 							tooltip="{i18n>masterSearchTooltip}"
@@ -72,7 +72,7 @@
 							press=".onOpenViewSettings"
 							icon="sap-icon://sort"
 							type="Transparent"/>
-                            
+                             -->
 					</Toolbar>
 				</headerToolbar>
 				<items>

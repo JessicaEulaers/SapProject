@@ -111,7 +111,6 @@
 				</items>
 			</Table>
             <Table 
-
                 items="{detailView>/Flights}">
                 <headerToolbar>
                     <Toolbar >
